@@ -27,60 +27,21 @@ def index():
     return render_template("homepage.html")
 
 
-count = [1,2,3]
-color = [Red, Blue, Green]
-shape = [circle, square, bone]
-fill = [speckle, solid, empty]
-
-# card = [0,1,2,2] count 1, color blue, shape bone, fill empty
-
 # select random 12 cards to display that includes at least 1 zet
 # keep track of zets found and remaining
 # verify if zet selected is from the remaining zets
-def is_zet(x, y, z):
-    """Determine if zet fulfills criteria of all the same OR all different on 4 criteria:  count, color, shape, fill)"""
 
-    if not (x[0] == y[0] == z[0]) | (x[0] != y[0] != z[0]):
-        return False  # count
-
-    if not (x[1] == y[1] == z[1]) | (x[1] != y[1] != z[1]):
-        return False  # color
-
-    if not (x[2] == y[2] == z[2]) | (x[2] != y[2] != z[2]):
-        return False  # shape
-
-    if not (x[3] == y[3] == z[3]) | (x[3] != y[3] != z[3]):
-        return False  # fill
-
-
-    # if defining card class with feature methods 
-    if not (x.count == y.count == z.count) | (x.count != y.count != z.count):
-        return False
-
-    if not (x.color == y.color == z.color) | (x.color != y.color != y.color):
-        return False
-
-    if not (x.shape == y.shape == z.shape) | (x.shape != y.shape != z.shape):
-        return False
-
-    if not (x.fill == y.fill == z.fill) | (x.fill != y.fill != z.fill):
-        return False
-
-    return True
-
-
-@app.route('/create_deck')
-def create_deck():
-    """Create an initial deck of 81 cards where each feature combination occurs precisely once in the deck."""
-
+    # with open('seed.txt', 'r') as f:
+    #     # create a list of cards to display
+    #     deck = f.readlines()
 
 @app.route('/generate_display')
 def generate_display():
     """Create the initial panel of cards to display."""
 
-    with open('seed.txt', 'r') as f:
-        # create a list of cards to display
-        deck = f.readlines()
+    deck = Deck()
+
+    zet_deck = deck.shuffle().deal()
 
     need_new_cards = True
 
