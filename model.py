@@ -9,6 +9,10 @@ class Card(object):
     Color: integer 0-3
     Shape: integer 0-3
     Fill: integer 0-3
+
+    Example: 
+    [0, 1, 2, 2] is a card that has these attributes:
+    ['1', 'Blue', 'bone', 'speckle']
     """
 
     count_names = ['1','2','3']
@@ -31,7 +35,17 @@ class Card(object):
 
 
 class Deck(object):
-    """Represents a zet deck of 81 cards where each feature combination occurs precisely once in the deck."""
+    """Represents a zet deck of 81 cards where each feature combination occurs precisely once in the deck.
+
+    Example:
+    [
+        [0,1,2,2],
+        [1,2,0,1],
+        [0,0,0,0], . . . ]
+
+        0 <= i <= 3   is the number of columns (of 4 attributes)
+        0 <= j <= 80  is the number of rows (of 81 cards)
+    """
 
     def __init__(self):
         self.deck = []
@@ -47,12 +61,32 @@ class Deck(object):
 
         random.shuffle(self.cards)
 
-    def deal(self):
-        """Deals 12 cards for Zet play."""
+class Deal(object):
+    """Deals 12 cards for Zet play.
 
-        self.deal = []
-        for card in range(12):
-            self.deal.append(card)
+    Example:
+    [
+        [0,1,2,2],
+        [1,2,0,1],
+        [0,0,0,0], . . . ]
+
+        0 <= i <= 3   is the number of columns (of 4 attributes)
+        0 <= j <= 11  is the number of rows (of 12 cards)
+    """
+
+    def __init__(self, n=12):
+        self.deal = random.sample(Deck,n)
+
+
+    def findZets(self):
+        found = []
+
+        for i, card_i in enumerate(self.deal):
+            for j, card_j in enumerate(self.deal[i+1:], i+1):
+                for k, card_k in enumerate(self.cards[j+1:], j+1):
+                    if card_i.is_zet(card_j, card_k):
+                        found.append((card_i, card_j, card_k))
+        return found
 
 
 class Hand(x, y, z):
@@ -78,18 +112,6 @@ class Hand(x, y, z):
             return False
 
         return True
-
-        # if not (x[0] == y[0] == z[0]) | (x[0] != y[0] != z[0]):
-        #     return False  # count
-
-        # if not (x[1] == y[1] == z[1]) | (x[1] != y[1] != z[1]):
-        #     return False  # color
-
-        # if not (x[2] == y[2] == z[2]) | (x[2] != y[2] != z[2]):
-        #     return False  # shape
-
-        # if not (x[3] == y[3] == z[3]) | (x[3] != y[3] != z[3]):
-        #     return False  # fill
 
 
 if __name__ == "__main__":
