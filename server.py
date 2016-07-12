@@ -31,10 +31,6 @@ def index():
 # keep track of zets found and remaining
 # verify if zet selected is from the remaining zets
 
-    # with open('seed.txt', 'r') as f:
-    #     # create a list of cards to display
-    #     deck = f.readlines()
-
 @app.route('/generate_display')
 def generate_display():
     """Create the initial panel of cards to display."""
