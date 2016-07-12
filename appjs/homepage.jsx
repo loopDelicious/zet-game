@@ -1,4 +1,10 @@
+var React = require("react");
+var ReactDOM = require("react-dom");
+var ZetModule = require('./zet.jsx');
+
+
+
 ReactDOM.render(
-    <h1>Hello, world!</h1>,
+    <ZetModule />,
     document.getElementById('example')
 );
