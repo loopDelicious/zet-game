@@ -71,10 +71,5 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
     app.debug = True
 
-    connect_to_db(app)
-
-    # Use the DebugToolbar
-    # DebugToolbarExtension(app)
-
     app.run()
     # app.run(host='0.0.0.0')

@@ -1,6 +1,4 @@
 
-{% extends 'base.html' %}
-
 {% block head %}
     <title>Zet</title>
 {% endblock %}
@@ -15,6 +13,8 @@
         <div class='intro'>
             <h3>Every card has four attributes (number, shape, color and fill), each of which can take 3 possible values. In a zet, for each attribute, all three cards should have either the same value, or the three different values. </h3>
         </div>
+
+        <div id='example'></div>
         
 
         <!-- footer attribution and disclaimer -->
@@ -22,6 +22,9 @@
 
     </div>
 
-    <script src="/static/homepage.js"></script>
+    <script src="/static/react/react-with-addons.js"></script>
+    <script src="/static/react/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel" src="/static/homepage.js"></script>
 
 {% endblock %}

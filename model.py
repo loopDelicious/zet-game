@@ -54,7 +54,7 @@ class Deck(object):
                 for shape in range(3):
                     for fill in range(3):
                         card = Card(count, color, shape, fill)
-        self.deck.append(card)
+                        self.deck.append(card)
 
     def shuffle(self):
         """Shuffles the cards in this deck."""
