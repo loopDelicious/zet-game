@@ -48,37 +48,43 @@ class Deck(object):
     """
 
     def __init__(self):
-        self.deck = []
+        self.cards = []
         for count in range(3):
             for color in range(3):
                 for shape in range(3):
                     for fill in range(3):
                         card = Card(count, color, shape, fill)
-                        self.deck.append(card)
+                        self.cards.append(card)
 
     def shuffle(self):
-        """Shuffles the cards in this deck."""
+        """Shuffles cards in the deck."""
 
         random.shuffle(self.cards)
 
-class Deal(object):
-    """Deals 12 cards for Zet play.
+    def newDeal(self):
+        """ Deals 12 cards for Zet play.
 
-    Example:
-    [
-        [0,1,2,2],
-        [1,2,0,1],
-        [0,0,0,0], . . . ]
+        Example:
+        [
+            [0,1,2,2],
+            [1,2,0,1],
+            [0,0,0,0], . . . ]
 
         0 <= i <= 3   is the number of columns (of 4 attributes)
         0 <= j <= 11  is the number of rows (of 12 cards)
-    """
+        """
 
-    def __init__(self, n=12):
-        self.deal = random.sample(Deck,n)
+        deal_cards = []
+
+        for i,card in range(13):
+            deal_cards.append(self.cards.pop(i))
+
+        return deal_cards
 
 
     def findZets(self):
+        """Identify all the zets in a newDeal."""
+
         found = []
 
         for i, card_i in enumerate(self.deal):
@@ -89,15 +95,8 @@ class Deal(object):
         return found
 
 
-class Hand(x, y, z):
-    """Represents a selection of 3 zet cards."""
-    
-    def __init__(self, label=''):
-        self.cards = []
-        self.label = label
-
-    def is_zet():
-    """Determine if zet fulfills criteria of all the same OR all different on 4 criteria:  count, color, shape, fill)"""
+    def is_zet(x, y,z):
+        """Determine if a selection of 3 cards fulfills criteria of all the same OR all different on 4 criteria:  count, color, shape, fill)."""
 
         if not (x.count == y.count == z.count) | (x.count != y.count != z.count):
             return False

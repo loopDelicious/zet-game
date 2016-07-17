@@ -3,7 +3,9 @@
 import sqlalchemy
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, Response
+from model import Card, Deck
+
 
 import os
 import json
@@ -33,28 +35,28 @@ def index():
 
 @app.route('/generate_display')
 def generate_display():
-    """Create the initial panel of cards to display."""
+    """Create the initial panel of 12 cards to display."""
 
-    deck = Deck()
+    card_batch = Deck().shuffle().newDeal()
+    import pdb; pdb.set_trace()
 
-    zet_deck = deck.shuffle().deal()
+    # need_new_cards = True
 
-    need_new_cards = True
+    # while need_new_cards:
 
-    while need_new_cards:
+    #     card_batch = []
 
-        card_batch = []
+    #     # generate an array of 12 random cards
+    #     for i in range(1,12):
+    #         card = random.choice(deck) # random card
+    #         card_batch.append(card)
 
-        # generate an arry of 12 random cards
-        for i in range(1,12):
-            card = random.choice(deck) # random card
-            card_batch.append()
+    #     # if card_batch contains at least 1 zet, maintain
+    #     #   need_new_cards = False
+    #     # else redraw
+    #     card_batch
 
-        # if card_batch contains at least 1 zet, maintain
-        #   need_new_cards = False
-        # else redraw
-
-    return card_batch
+    return Response(json.dumps(card_batch),  mimetype='application/json')
 
 
 @app.route('/favicon.ico')

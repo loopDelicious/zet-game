@@ -6,5 +6,6 @@ var ZetModule = require('./zet.jsx');
 
 ReactDOM.render(
     <ZetModule />,
-    document.getElementById('example')
+    document.getElementById('display')
 );
+
